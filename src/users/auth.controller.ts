@@ -8,8 +8,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { compare, hash } from 'bcrypt';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { AuthGuard } from '../guards/auth.guard';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { ReqSigninDTO, ReqSignupDTO } from './dtos/req.auth.dto';
 import { ResSignupDTO } from './dtos/res.auth.dto';
 import { ErrDuplicatedRecord, ErrEmptyRecord } from './error/error';
