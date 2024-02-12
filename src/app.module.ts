@@ -4,7 +4,8 @@ import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Report } from './reports/reports.entity';
+import { CurrentUserMiddleware } from './middlewares/current-user.middleware';
+import { Report } from './reports/entity/report.entity';
 import { ReportsModule } from './reports/reports.module';
 import { User } from './users/entity/user.entity';
 import { UsersModule } from './users/users.module';
@@ -51,6 +52,7 @@ export class AppModule {
           keys: ['secret'],
           maxAge: 24 * 60 * 60 * 1000, //24
         }),
+        CurrentUserMiddleware,
       )
       .forRoutes('*');
   }

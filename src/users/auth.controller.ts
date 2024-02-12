@@ -9,11 +9,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { compare, hash } from 'bcrypt';
+import { ErrDuplicatedRecord, ErrEmptyRecord } from '../error/error';
 import { AuthGuard } from '../guards/auth.guard';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { ReqSigninDTO, ReqSignupDTO } from './dtos/req.auth.dto';
-import { ResSignupDTO } from './dtos/res.auth.dto';
-import { ErrDuplicatedRecord, ErrEmptyRecord } from './error/error';
+import { ResSigninDTO, ResSignoutDTO, ResSignupDTO } from './dtos/res.auth.dto';
 import { UsersService } from './users.service';
 
 @Controller('auth')
@@ -36,6 +36,7 @@ export class AuthController {
     }
   }
 
+  @Serialize(ResSigninDTO)
   @Post('/signin')
   @HttpCode(200)
   async signin(
@@ -58,6 +59,7 @@ export class AuthController {
     }
   }
 
+  @Serialize(ResSignoutDTO)
   @UseGuards(AuthGuard)
   @Post('/signout')
   @HttpCode(200)

@@ -30,6 +30,7 @@ describe('UsersController', () => {
         id: 1,
         email: 'test@test.com',
         password: '12345678',
+        reports: null,
       });
 
       expect(result.user.id).toEqual(1);

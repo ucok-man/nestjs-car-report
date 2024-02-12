@@ -1,9 +1,9 @@
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { compare, hash } from 'bcrypt';
+import { ErrDuplicatedRecord } from '../error/error';
 import { AuthController } from './auth.controller';
 import { User } from './entity/user.entity';
-import { ErrDuplicatedRecord } from './error/error';
 import { UsersService } from './users.service';
 
 describe('AuthController', () => {
@@ -20,6 +20,7 @@ describe('AuthController', () => {
           id: 1,
           email: email,
           password: password,
+          reports: null,
         });
       },
 
@@ -29,6 +30,7 @@ describe('AuthController', () => {
           id: 1,
           email: email,
           password: hashp,
+          reports: null,
         });
       },
     };

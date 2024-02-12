@@ -9,3 +9,13 @@ export class ResSignupDTO {
   @Expose()
   message: string;
 }
+
+export class ResSigninDTO {
+  @Expose()
+  message: string;
+}
+
+export class ResSignoutDTO {
+  @Expose()
+  message: string;
+}
