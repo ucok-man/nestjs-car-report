@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  HttpCode,
   Post,
   Session,
   UnauthorizedException,
@@ -21,6 +22,7 @@ export class AuthController {
 
   @Serialize(ResSignupDTO)
   @Post('/signup')
+  @HttpCode(201)
   async signup(@Body() body: ReqSignupDTO) {
     try {
       const hashp = await hash(body.password, 12);
@@ -35,6 +37,7 @@ export class AuthController {
   }
 
   @Post('/signin')
+  @HttpCode(200)
   async signin(
     @Body() body: ReqSigninDTO,
     @Session() session: { userid: number },
@@ -57,6 +60,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post('/signout')
+  @HttpCode(200)
   signout(@Session() session: { userid: number | null }) {
     session.userid = null;
     return { message: 'success' };
