@@ -44,12 +44,14 @@ const cookieSession = require('cookie-session');
   ],
 })
 export class AppModule {
+  constructor(private cfgservice: ConfigService) {}
+
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
           name: 'session',
-          keys: ['secret'],
+          keys: [this.cfgservice.get('COOKIE_KEY')],
           maxAge: 24 * 60 * 60 * 1000, //24
         }),
         CurrentUserMiddleware,
